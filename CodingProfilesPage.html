@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Coding Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leet-orange: #ffa116;
+            --leet-black: #1a1a1a;
+            --leet-dark: #2d2d2d;
+            --leet-light: #eaeaea;
+            --leet-green: #4CAF50;
+            --leet-blue: #2196F3;
+            --leet-red: #f44336;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .platform-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 30px auto;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        
+        .platform-header {
+            background: linear-gradient(135deg, var(--leet-black), var(--leet-dark));
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .platform-header::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: url('https://leetcode.com/static/images/logo_dark.png') no-repeat;
+            background-size: contain;
+            opacity: 0.1;
+        }
+        
+        .platform-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .platform-title h2 {
+            color: var(--leet-orange);
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .platform-rank {
+            background-color: var(--leet-orange);
+            color: var(--leet-black);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+        
+        .stat-card h3 {
+            color: var(--leet-black);
+            margin-top: 0;
+            border-bottom: 2px solid var(--leet-orange);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .progress-container {
+            margin: 15px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+        
+        .easy { background-color: var(--leet-green); }
+        .medium { background-color: var(--leet-orange); }
+        .hard { background-color: var(--leet-red); }
+        
+        .badges-section, .skills-section {
+            padding: 0 20px 20px;
+        }
+        
+        .badge-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .badge-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .badge-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--leet-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .skill-category {
+            margin-bottom: 25px;
+        }
+        
+        .skill-category h3 {
+            color: var(--leet-black);
+            border-left: 4px solid var(--leet-orange);
+            padding-left: 10px;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .skill-tag {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .skill-tag .count {
+            color: var(--leet-orange);
+            font-weight: bold;
+        }
+        
+        .advanced { border-left-color: var(--leet-red); }
+        .intermediate { border-left-color: var(--leet-orange); }
+        .fundamental { border-left-color: var(--leet-green); }
+
+
+        
+     /* Transparent footer fixed at bottom */
+        footer.footer {
+            flex-shrink: 0; /* don’t shrink */
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 12px 0;
+            margin-top: auto; /* push footer down if page short */
+        }
+
+        .footer-btn {
+            background-color: rgba(0, 123, 255, 0.85);
+            border: none;
+            padding: 10px 28px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+
+        .footer-btn:hover {
+            background-color: rgba(0, 123, 255, 1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-btn {
+            padding: 12px 32px;
+            font-size: 1.1rem;
+            }
+        }
+        
+
+    </style>
+</head>
+<body>
+    <!-- LeetCode Container -->
+    <div class="platform-container">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>LeetCode</h2>
+                <div class="platform-rank">Rank: 111,649 (Top 15%)</div>
+            </div>
+            <p>giriprasad22 | AP_22BCE9201</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Problems Solved</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Total: 560/3555</span>
+                        <span>15.7%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 15.7%; background-color: var(--leet-orange)"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Easy: 191/877</span>
+                        <span>21.8%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill easy" style="width: 21.8%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Medium: 310/1843</span>
+                        <span>16.8%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill medium" style="width: 16.8%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Hard: 59/835</span>
+                        <span>7.1%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill hard" style="width: 7.1%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Activity</h3>
+                <p><strong>Current Streak:</strong> 250 days </p>
+                <p><strong>Active Days (1Y):</strong> 261 (71%)</p>
+                <p><strong>Submissions (1Y):</strong> 1,157 (~3.2/day)</p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Consistency</span>
+                        <span>71%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 71%; background-color: var(--leet-blue)"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Languages</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Java</span>
+                        <span>550</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 96%; background-color: #5382A1"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>MySQL</span>
+                        <span>10</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 2%; background-color: #00758F"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Python3</span>
+                        <span>8</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 1.5%; background-color: #3776AB"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="badges-section">
+            <h3>Badges & Achievements</h3>
+            <div class="badge-container">
+                <div class="badge-card">
+                    <div class="badge-icon">100</div>
+                    <div class="badge-info">
+                        <h4>100 Days Badge 2025</h4>
+                        <p>Apr 10, 2025</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">50</div>
+                    <div class="badge-info">
+                        <h4>50 Days Badge 2025</h4>
+                        <p>Feb 21, 2025</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">100</div>
+                    <div class="badge-info">
+                        <h4>100 Days Badge 2024</h4>
+                        <p>Dec 13, 2024</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">50</div>
+                    <div class="badge-info">
+                        <h4>50 Days Badge (Active)</h4>
+                        <p>Current streak</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">30</div>
+                    <div class="badge-info">
+                        <h4>Monthly Badges</h4>
+                        <p>Oct 2024 - Apr 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-section">
+            <h3>Problem-Solving Skills</h3>
+            
+            <div class="skill-category advanced">
+                <h3>Advanced Skills</h3>
+                <div class="skill-tags">
+                    <div class="skill-tag">Dynamic Programming <span class="count">x66</span></div>
+                    <div class="skill-tag">Backtracking <span class="count">x25</span></div>
+                    <div class="skill-tag">Union Find <span class="count">x20</span></div>
+                </div>
+            </div>
+            
+            <div class="skill-category intermediate">
+                <h3>Intermediate Skills</h3>
+                <div class="skill-tags">
+                    <div class="skill-tag">Hash Table <span class="count">x122</span></div>
+                    <div class="skill-tag">Depth-First Search <span class="count">x84</span></div>
+                    <div class="skill-tag">Tree <span class="count">x72</span></div>
+                </div>
+            </div>
+            
+            <div class="skill-category fundamental">
+                <h3>Fundamental Skills</h3>
+                <div class="skill-tags">
+                    <div class="skill-tag">Array <span class="count">x296</span></div>
+                    <div class="skill-tag">String <span class="count">x128</span></div>
+                    <div class="skill-tag">Sorting <span class="count">x67</span></div>
+                    <div class="skill-tag">Two Pointers <span class="count">x62</span></div>
+                    <div class="skill-tag">Matrix <span class="count">x46</span></div>
+                    <div class="skill-tag">Stack <span class="count">x44</span></div>
+                    <div class="skill-tag">Linked List <span class="count">x32</span></div>
+                    <div class="skill-tag">Simulation <span class="count">x27</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HackerRank Container -->
+    <div class="platform-container" style="--primary-color: #2EC866;">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>HackerRank</h2>
+                <div class="platform-rank">Rank: 152 (Shell) | Java: 70 pts</div>
+            </div>
+            <p>Giri Prasad Abi | @ap_22bce9201</p>
+        </div>
+        
+        <div class="stats-grid">
+            <!-- Column 1: Shell Skills (Existing) -->
+            <div class="stat-card">
+                <h3>Shell Skills</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Bash (Basic)</span>
+                        <span>8 pts</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%; background-color: #2EC866;"></div>
+                    </div>
+                </div>
+                <h4>Recent Challenges:</h4>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Let's Echo (97.56%)</li>
+                    <li>Looping and Skipping (96.79%)</li>
+                    <li>Personalized Echo (99.07%)</li>
+                </ul>
+            </div>
+            
+            <!-- Column 2: Java Skills (New) -->
+            <div class="stat-card">
+                <h3>Java Skills</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Java (Basic)</span>
+                        <span>70 pts</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 70%; background-color: #5382A1;"></div>
+                    </div>
+                </div>
+                <h4>Top Challenges:</h4>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Java Loops I (97.70%)</li>
+                    <li>Java Loops II (97.54%)</li>
+                    <li>Output Formatting (96.62%)</li>
+                </ul>
+            </div>
+            
+            <!-- Column 3: Badges & Activity (Updated) -->
+            <div class="stat-card">
+                <h3>Badges & AI</h3>
+                <div style="display: flex; gap: 15px; margin: 15px 0;">
+                    <div style="text-align: center;">
+                        <div style="background: #FFD700; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px;">
+                            <span style="font-weight: bold; color: #333;">J</span>
+                        </div>
+                        <p>Java<br>**</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: #C0C0C0; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px;">
+                            <span style="font-weight: bold; color: #333;">S</span>
+                        </div>
+                        <p>SQL<br>*</p>
+                    </div>
+                </div>
+                
+                <div style="background: #F0F8FF; padding: 12px; border-radius: 8px; margin-top: 10px;">
+                    <p style="margin: 0 0 8px 0; font-weight: 500;">AI Interview Simulator</p>
+                    <p style="font-size: 0.9rem; margin: 0;">"Could you crack the real thing?"</p>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Java Challenges Section -->
+        <div class="skills-section">
+            <h3>Java Challenges (8 Solved)</h3>
+            <div style="background: white; border-radius: 8px; padding: 15px; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
+                    <!-- Challenge Cards -->
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Stdin and Stdout I</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 5 | Success: 96.80%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">If-Else</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 91.60%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Stdin and Stdout II</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 93.18%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Output Formatting</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 96.62%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Loops I</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 97.70%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Loops II</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 97.54%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Datatypes</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 93.79%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Welcome Challenge</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 5 | Success: 97.04%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shell Section (Existing) -->
+        <div class="skills-section">
+            <h3>Shell Subdomains</h3>
+            <div class="skill-tags">
+                <div class="skill-tag">Bash</div>
+                <div class="skill-tag">Text Processing</div>
+                <div class="skill-tag">Arrays in Bash</div>
+                <div class="skill-tag">Grep Sed Awk</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CodeChef Container -->
+    <div class="platform-container" style="--primary-color: #7F7F7F;">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>CodeChef</h2>
+                <div class="platform-rank">Problems Solved: 51</div>
+            </div>
+            <p>Giri Prasad M | @ap_22bce9201 | India</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Account Status</h3>
+                <div style="margin-top: 15px;">
+                    <p><strong>Type:</strong> Other</p>
+                    <p><strong>Pro Plan:</strong> Not Active</p>
+                    <p><strong>Streak:</strong> Not Started</p>
+                </div>
+                
+                <h4 style="margin-top: 20px;">Heatmap Activity</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px;">
+                    <div style="width: 15px; height: 15px; background: #EBEDF0; border-radius: 2px;"></div>
+                    <div style="width: 15px; height: 15px; background: #9BE9A8; border-radius: 2px;"></div>
+                    <div style="width: 15px; height: 15px; background: #40C463; border-radius: 2px;"></div>
+                    <!-- More heatmap squares would go here -->
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Last 6 months</p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Badges Progress</h3>
+                <div style="margin-top: 15px;">
+                    <div style="margin-bottom: 15px;">
+                        <p style="margin: 5px 0; font-weight: 500;">Problem Solver</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0.4%; background-color: #CD7F32;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem;">1/250 (Bronze)</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <p style="margin: 5px 0; font-weight: 500;">Code Enthusiast</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem;">0/10 solutions explained</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <p style="margin: 5px 0; font-weight: 500;">Contest Contender</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem;">0/5 contests</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Learning Paths</h3>
+                <div style="margin-top: 15px;">
+                    <p style="font-weight: 500; margin-bottom: 5px;">Precision Track</p>
+                    <ul style="padding-left: 20px; margin-top: 5px;">
+                        <li>Stacks and Queues</li>
+                        <li>Bit manipulation</li>
+                        <li>Two Pointers</li>
+                    </ul>
+                    
+                    <p style="font-weight: 500; margin: 15px 0 5px 0;">Difficulty Focus</p>
+                    <div class="skill-tags" style="margin-top: 5px;">
+                        <div class="skill-tag">1000-1400</div>
+                        <div class="skill-tag">1400-1600</div>
+                        <div class="skill-tag">1600-1800</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-section">
+            <h3>Practice Paths</h3>
+            <div class="skill-tags">
+                <div class="skill-tag">Amazon Interview</div>
+                <div class="skill-tag">Linked Lists</div>
+                <div class="skill-tag">Prefix Sum</div>
+                <div class="skill-tag">Sliding Window</div>
+                <div class="skill-tag">1800-2000</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Codeforces Container -->
+    <div class="platform-container" style="--primary-color: #3B5998;">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>Codeforces</h2>
+                <div class="platform-rank">Unrated | 4 Problems Solved</div>
+            </div>
+            <p>ap_22bce9201 | Registered: 7 months ago</p>
+        </div>
+        
+        <div class="stats-grid">
+            <!-- Column 1: Activity Stats -->
+            <div class="stat-card">
+                <h3>Activity</h3>
+                <div style="margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>All Time:</span>
+                        <span>4 problems</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Last Year:</span>
+                        <span>4 problems</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Last Month:</span>
+                        <span>0 problems</span>
+                    </div>
+                    
+                    <h4 style="margin-top: 20px;">Streaks</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Max Streak:</span>
+                        <span>3 days</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Current Year:</span>
+                        <span>3 days</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 2: Profile Info -->
+            <div class="stat-card">
+                <h3>Profile</h3>
+                <div style="margin-top: 15px;">
+                    <p><strong>Status:</strong> Online now</p>
+                    <p><strong>Contribution:</strong> 0</p>
+                    <p><strong>Friends:</strong> 0 users</p>
+                    
+                    <h4 style="margin-top: 20px;">Quick Links</h4>
+                    <div class="skill-tags" style="margin-top: 10px;">
+                        <div class="skill-tag">Submissions</div>
+                        <div class="skill-tag">Contests</div>
+                        <div class="skill-tag">Blog</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>      
+
+    <footer class="footer">
+    <div class="footer-container">
+      <button class="footer-btn" onclick="location.href='index.html'">Home</button>
+      <button class="footer-btn" onclick="history.back()">Back</button>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
