@@ -11,61 +11,62 @@
     <script src="index.js"></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="glass-nav">
+    <!-- Header with enhanced animation classes -->
+    <header class="glass-nav animate-nav">
         <div class="container">
-            <a href="#" class="logo">GIRI<span>PRASAD</span></a>
+            <a href="#" class="logo hover-scale">GIRI<span>PRASAD</span></a>
             <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link hover-underline">Home</a></li>
+                    <li><a href="#about" class="nav-link hover-underline">About</a></li>
+                    <li><a href="#projects" class="nav-link hover-underline">Projects</a></li>
+                    <li><a href="#skills" class="nav-link hover-underline">Skills</a></li>
+                    <li><a href="#contact" class="nav-link hover-underline">Contact</a></li>
                 </ul>
-                <button id="theme-toggle" aria-label="Toggle dark mode">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="hover-scale">
                     <i class="fas fa-moon"></i>
                 </button>
-                <div class="menu-toggle">
+                <div class="menu-toggle hover-scale">
                     <i class="fas fa-bars"></i>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with enhanced animations -->
     <section id="home" class="hero">
-        <div class="particles" id="particles-js"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="animate-pop-in">M. GIRI PRASAD</h1>
-                    <h2 class="animate-pop-in">AI/ML Engineer & Web Developer(Fronted)</h2>
-                    <p class="animate-pop-in">Passionate about building intelligent systems and impactful web solutions</p>
-                </div>
-                <div class="hero-buttons animate-pop-in">
-                    <a href="#projects" class="btn btn-primary">
-                        <span>View Projects</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span>Contact Me</span>
-                        <i class="fas fa-paper-plane"></i>
-                    </a>
-                </div>
+    <div class="particles" id="particles-js"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text animate-fade-up" data-delay="0.1s">
+                <h1 class="text-gradient">M. GIRI PRASAD</h1>
+                <h2 class="animate-charcter">AI/ML Engineer & Web Developer(Frontend)</h2>
+                <p>Passionate about building intelligent systems and impactful web solutions</p>
             </div>
-            <div class="scroll-down animate-bounce">
-                <span>Scroll Down</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="hero-buttons animate-fade-up" data-delay="0.3s">
+                <a href="#projects" class="btn btn-primary hover-grow">
+                    <span>View Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-secondary hover-grow">
+                    <span>Contact Me</span>
+                    <i class="fas fa-paper-plane"></i>
+                </a>
             </div>
         </div>
-    </section>
+        <div class="scroll-down animate-bounce">
+                <span>Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
+        </div>
+        
+    </div>
+</section>
 
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2 class="section-title">About <span>Me</span></h2>
+            <h2 class="section-title animate-fade-up">About <span>Me</span></h2>
             <div class="about-content">
                 <div class="about-text">
                     <p>I'm a Computer Science student at <strong>Vellore Institute of Technology, Amaravati</strong>, specializing in <strong>Artificial Intelligence, Machine Learning, and Web Development</strong>.</p>
