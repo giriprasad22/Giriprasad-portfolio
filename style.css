@@ -240,12 +240,13 @@ nav a:hover::after {
 }
 
 /* ===== HERO SECTION ===== */
+
+/* ===== HERO SECTION ===== */
 .hero {
     height: 100vh;
-    min-height: 600px;
+    min-height: 500px;
     display: flex;
     align-items: center;
-    justify-content: center;
     text-align: center;
     color: white;
     background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
@@ -253,28 +254,13 @@ nav a:hover::after {
     position: relative;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at 75% 30%,
-        rgba(108, 99, 255, 0.15) 0%,
-        transparent 50%
-    );
-}
-
 .hero-content {
     position: relative;
     z-index: 2;
+    width: 100%;
     max-width: 800px;
+    margin: 0 auto;
     padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
 }
 
 .hero-text {
@@ -284,32 +270,7 @@ nav a:hover::after {
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    background: linear-gradient(to right, #ffffff, #e0e0ff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1.2;
-}
-
-.hero h2 {
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-    color: rgba(255, 255, 255, 0.8);
-    max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto; /* This centers the hero-text */
 }
 
 .hero-buttons {
@@ -323,7 +284,34 @@ nav a:hover::after {
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: fit-content;
+    margin: 2rem auto 0; /* Centers the buttons */
 }
+
+.hero h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem); /* Update to use clamp() */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    background: linear-gradient(to right, #ffffff, #e0e0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem); /* Update to use clamp() */
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.2rem); /* Update to use clamp() */
+    margin: 0 auto 2rem; /* Update margin */
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+}
+
+
 
 .scroll-down {
     position: absolute;
@@ -342,7 +330,6 @@ nav a:hover::after {
     margin-top: 10px;
     font-size: 1.2rem;
 }
-
 /* ===== PROJECTS SECTION ===== */
 .projects-grid {
     display: grid;
@@ -1079,3 +1066,168 @@ nav a:hover::after {
 }
 
 
+/* ===== BASE STYLES ===== */
+/* Your existing base styles remain unchanged */
+/* Only adding new animation and interaction styles */
+
+/* ===== ANIMATION KEYFRAMES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-20px);}
+    60% {transform: translateY(-10px);}
+}
+
+@keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+@keyframes float {
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-15px);}
+    100% {transform: translateY(0px);}
+}
+
+/* ===== NEW ANIMATION CLASSES ===== */
+.animate-fade-up {
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+}
+
+.animate-nav {
+    animation: fadeInUp 0.5s forwards;
+}
+
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+
+.animate-charcter {
+    background: linear-gradient(to right, #6c63ff, #ff6584, #6c63ff);
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s linear infinite;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, #6c63ff, #ff6584);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ===== HOVER EFFECTS ===== */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-grow {
+    transition: all 0.3s ease;
+}
+
+.hover-grow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3);
+}
+
+.hover-underline {
+    position: relative;
+}
+
+.hover-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.hover-underline:hover::after {
+    width: 100%;
+}
+
+/* ===== SCROLL REVEAL ANIMATIONS ===== */
+[data-animate] {
+    opacity: 0;
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+[data-animate="fade-up"] {
+    transform: translateY(30px);
+}
+
+[data-animate="fade-down"] {
+    transform: translateY(-30px);
+}
+
+[data-animate="fade-left"] {
+    transform: translateX(-30px);
+}
+
+[data-animate="fade-right"] {
+    transform: translateX(30px);
+}
+
+[data-animate].animate {
+    opacity: 1;
+    transform: translate(0);
+}
+
+/* ===== RESPONSIVE IMPROVEMENTS ===== */
+@media (max-width: 768px) {
+    /* Enhanced mobile menu */
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--light-alt);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        transition: all 0.5s ease;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-link {
+        padding: 1rem 0;
+        font-size: 1.8rem;
+    }
+
+    /* Particle.js optimization for mobile */
+    #particles-js {
+        display: none;
+    }
+
+    /* Section padding adjustment */
+    section {
+        padding: 5rem 0;
+    }
+}
