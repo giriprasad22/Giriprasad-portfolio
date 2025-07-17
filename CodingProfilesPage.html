@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitive Coding Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --leet-orange: #ffa116;
+            --leet-black: #1a1a1a;
+            --leet-dark: #2d2d2d;
+            --leet-light: #eaeaea;
+            --leet-green: #4CAF50;
+            --leet-blue: #2196F3;
+            --leet-red: #f44336;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .platform-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 30px auto;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        
+        .platform-header {
+            background: linear-gradient(135deg, var(--leet-black), var(--leet-dark));
+            color: white;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .platform-header::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: url('https://leetcode.com/static/images/logo_dark.png') no-repeat;
+            background-size: contain;
+            opacity: 0.1;
+        }
+        
+        .platform-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .platform-title h2 {
+            color: var(--leet-orange);
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .platform-rank {
+            background-color: var(--leet-orange);
+            color: var(--leet-black);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+        }
+        
+        .stat-card h3 {
+            color: var(--leet-black);
+            margin-top: 0;
+            border-bottom: 2px solid var(--leet-orange);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .progress-container {
+            margin: 15px 0;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+        
+        .easy { background-color: var(--leet-green); }
+        .medium { background-color: var(--leet-orange); }
+        .hard { background-color: var(--leet-red); }
+        
+        .badges-section, .skills-section {
+            padding: 0 20px 20px;
+        }
+        
+        .badge-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .badge-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .badge-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--leet-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .skill-category {
+            margin-bottom: 25px;
+        }
+        
+        .skill-category h3 {
+            color: var(--leet-black);
+            border-left: 4px solid var(--leet-orange);
+            padding-left: 10px;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .skill-tag {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .skill-tag .count {
+            color: var(--leet-orange);
+            font-weight: bold;
+        }
+        
+        .advanced { border-left-color: var(--leet-red); }
+        .intermediate { border-left-color: var(--leet-orange); }
+        .fundamental { border-left-color: var(--leet-green); }
+
+        .footer {
+            flex-shrink: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 -1px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 12px 0;
+            margin-top: auto;
+        }
+
+        .footer-btn {
+            background-color: rgba(0, 123, 255, 0.85);
+            border: none;
+            padding: 10px 28px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+
+        .footer-btn:hover {
+            background-color: rgba(0, 123, 255, 1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 480px) {
+            .footer-btn {
+                padding: 12px 32px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: var(--leet-orange);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- LeetCode Container -->
+    <div class="platform-container">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>LeetCode</h2>
+                <div class="platform-rank" id="leet-rank">Loading <span class="loading"></span></div>
+            </div>
+            <p id="leet-username">giriprasad22 | ap_22bce9201</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Problems Solved</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="total-solved-label">Total: Loading...</span>
+                        <span id="total-solved-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="total-solved-bar" style="width: 0%; background-color: var(--leet-orange)"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="easy-solved-label">Easy: Loading...</span>
+                        <span id="easy-solved-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill easy" id="easy-solved-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="medium-solved-label">Medium: Loading...</span>
+                        <span id="medium-solved-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill medium" id="medium-solved-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span id="hard-solved-label">Hard: Loading...</span>
+                        <span id="hard-solved-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill hard" id="hard-solved-bar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Activity</h3>
+                <p><strong>Current Streak:</strong> <span id="current-streak">Loading...</span></p>
+                <p><strong>Active Days (1Y):</strong> <span id="active-days">Loading...</span></p>
+                <p><strong>Submissions (1Y):</strong> <span id="submissions">Loading...</span></p>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Consistency</span>
+                        <span id="consistency-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="consistency-bar" style="width: 0%; background-color: var(--leet-blue)"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Languages</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Java</span>
+                        <span id="java-count">Loading...</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="java-bar" style="width: 0%; background-color: #5382A1"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>MySQL</span>
+                        <span id="mysql-count">Loading...</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="mysql-bar" style="width: 0%; background-color: #00758F"></div>
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Python3</span>
+                        <span id="python-count">Loading...</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="python-bar" style="width: 0%; background-color: #3776AB"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="badges-section">
+            <h3>Badges & Achievements</h3>
+            <div class="badge-container">
+                <div class="badge-card">
+                    <div class="badge-icon">100</div>
+                    <div class="badge-info">
+                        <h4>100 Days Badge 2025</h4>
+                        <p>Apr 10, 2025</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">50</div>
+                    <div class="badge-info">
+                        <h4>50 Days Badge 2025</h4>
+                        <p>Feb 21, 2025</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">100</div>
+                    <div class="badge-info">
+                        <h4>100 Days Badge 2024</h4>
+                        <p>Dec 13, 2024</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">50</div>
+                    <div class="badge-info">
+                        <h4>50 Days Badge 2024</h4>
+                        <p>Oct 24, 2024</p>
+                    </div>
+                </div>
+                
+                <div class="badge-card">
+                    <div class="badge-icon">30</div>
+                    <div class="badge-info">
+                        <h4>Monthly Badges</h4>
+                        <p>Oct 2024 - May 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-section">
+            <h3>Problem-Solving Skills</h3>
+            
+            <div class="skill-category advanced">
+                <h3>Advanced Skills</h3>
+                <div class="skill-tags">
+                    <div class="skill-tag">Dynamic Programming <span class="count">x71</span></div>
+                    <div class="skill-tag">Backtracking <span class="count">x25</span></div>
+                    <div class="skill-tag">Union Find <span class="count">x21</span></div>
+                    <div class="skill-tag">Divide and Conquer <span class="count">x16</span></div>
+                    <div class="skill-tag">Monotonic Stack <span class="count">x13</span></div>
+                    <div class="skill-tag">Topological Sort <span class="count">x9</span></div>
+                    <div class="skill-tag">Shortest Path <span class="count">x8</span></div>
+                    <div class="skill-tag">Trie <span class="count">x6</span></div>
+                </div>
+            </div>
+            
+            <div class="skill-category intermediate">
+                <h3>Intermediate Skills</h3>
+                <div class="skill-tags">
+                    <div class="skill-tag">Hash Table <span class="count">x128</span></div>
+                    <div class="skill-tag">Depth-First Search <span class="count">x88</span></div>
+                    <div class="skill-tag">Tree <span class="count">x75</span></div>
+                    <div class="skill-tag">Breadth-First Search <span class="count">x75</span></div>
+                    <div class="skill-tag">Math <span class="count">x71</span></div>
+                    <div class="skill-tag">Binary Tree <span class="count">x68</span></div>
+                    <div class="skill-tag">Greedy <span class="count">x54</span></div>
+                    <div class="skill-tag">Binary Search <span class="count">x51</span></div>
+                </div>
+            </div>
+            
+            <div class="skill-category fundamental">
+                <h3>Fundamental Skills</h3>
+                <div class="skill-tags">
+                    <div class="skill-tag">Array <span class="count">x308</span></div>
+                    <div class="skill-tag">String <span class="count">x139</span></div>
+                    <div class="skill-tag">Sorting <span class="count">x71</span></div>
+                    <div class="skill-tag">Two Pointers <span class="count">x67</span></div>
+                    <div class="skill-tag">Matrix <span class="count">x48</span></div>
+                    <div class="skill-tag">Stack <span class="count">x48</span></div>
+                    <div class="skill-tag">Linked List <span class="count">x34</span></div>
+                    <div class="skill-tag">Simulation <span class="count">x28</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HackerRank Container -->
+    <div class="platform-container" style="--primary-color: #2EC866;">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>HackerRank</h2>
+                <div class="platform-rank">Rank: 152 (Shell) | Java: 70 pts</div>
+            </div>
+            <p>Giri Prasad Abi | @ap_22bce9201</p>
+        </div>
+        
+        <div class="stats-grid">
+            <!-- Column 1: Shell Skills (Existing) -->
+            <div class="stat-card">
+                <h3>Shell Skills</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Bash (Basic)</span>
+                        <span>8 pts</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%; background-color: #2EC866;"></div>
+                    </div>
+                </div>
+                <h4>Recent Challenges:</h4>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Let's Echo (97.56%)</li>
+                    <li>Looping and Skipping (96.79%)</li>
+                    <li>Personalized Echo (99.07%)</li>
+                </ul>
+            </div>
+            
+            <!-- Column 2: Java Skills (New) -->
+            <div class="stat-card">
+                <h3>Java Skills</h3>
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Java (Basic)</span>
+                        <span>70 pts</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 70%; background-color: #5382A1;"></div>
+                    </div>
+                </div>
+                <h4>Top Challenges:</h4>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Java Loops I (97.70%)</li>
+                    <li>Java Loops II (97.54%)</li>
+                    <li>Output Formatting (96.62%)</li>
+                </ul>
+            </div>
+            
+            <!-- Column 3: Badges & Activity (Updated) -->
+            <div class="stat-card">
+                <h3>Badges & AI</h3>
+                <div style="display: flex; gap: 15px; margin: 15px 0;">
+                    <div style="text-align: center;">
+                        <div style="background: #FFD700; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px;">
+                            <span style="font-weight: bold; color: #333;">J</span>
+                        </div>
+                        <p>Java<br>**</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: #C0C0C0; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 5px;">
+                            <span style="font-weight: bold; color: #333;">S</span>
+                        </div>
+                        <p>SQL<br>*</p>
+                    </div>
+                </div>
+                
+                <div style="background: #F0F8FF; padding: 12px; border-radius: 8px; margin-top: 10px;">
+                    <p style="margin: 0 0 8px 0; font-weight: 500;">AI Interview Simulator</p>
+                    <p style="font-size: 0.9rem; margin: 0;">"Could you crack the real thing?"</p>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <!-- Java Challenges Section -->
+        <div class="skills-section">
+            <h3>Java Challenges (8 Solved)</h3>
+            <div style="background: white; border-radius: 8px; padding: 15px; margin-top: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
+                    <!-- Challenge Cards -->
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Stdin and Stdout I</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 5 | Success: 96.80%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">If-Else</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 91.60%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Stdin and Stdout II</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 93.18%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Output Formatting</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 96.62%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Loops I</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 97.70%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Loops II</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 97.54%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Datatypes</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 10 | Success: 93.79%</p>
+                    </div>
+                    <div style="border-left: 3px solid #4CAF50; padding-left: 10px;">
+                        <p style="margin: 0; font-weight: 500;">Welcome Challenge</p>
+                        <p style="margin: 5px 0 0 0; font-size: 0.8rem; color: #666;">Score: 5 | Success: 97.04%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shell Section (Existing) -->
+        <div class="skills-section">
+            <h3>Shell Subdomains</h3>
+            <div class="skill-tags">
+                <div class="skill-tag">Bash</div>
+                <div class="skill-tag">Text Processing</div>
+                <div class="skill-tag">Arrays in Bash</div>
+                <div class="skill-tag">Grep Sed Awk</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CodeChef Container -->
+    <div class="platform-container" style="--primary-color: #7F7F7F;">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>CodeChef</h2>
+                <div class="platform-rank">Problems Solved: 51</div>
+            </div>
+            <p>Giri Prasad M | @ap_22bce9201 | India</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Account Status</h3>
+                <div style="margin-top: 15px;">
+                    <p><strong>Type:</strong> Other</p>
+                    <p><strong>Pro Plan:</strong> Not Active</p>
+                    <p><strong>Streak:</strong> Not Started</p>
+                </div>
+                
+                <h4 style="margin-top: 20px;">Heatmap Activity</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px;">
+                    <div style="width: 15px; height: 15px; background: #EBEDF0; border-radius: 2px;"></div>
+                    <div style="width: 15px; height: 15px; background: #9BE9A8; border-radius: 2px;"></div>
+                    <div style="width: 15px; height: 15px; background: #40C463; border-radius: 2px;"></div>
+                    <!-- More heatmap squares would go here -->
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">Last 6 months</p>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Badges Progress</h3>
+                <div style="margin-top: 15px;">
+                    <div style="margin-bottom: 15px;">
+                        <p style="margin: 5px 0; font-weight: 500;">Problem Solver</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0.4%; background-color: #CD7F32;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem;">1/250 (Bronze)</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <p style="margin: 5px 0; font-weight: 500;">Code Enthusiast</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem;">0/10 solutions explained</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 15px;">
+                        <p style="margin: 5px 0; font-weight: 500;">Contest Contender</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem;">0/5 contests</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Learning Paths</h3>
+                <div style="margin-top: 15px;">
+                    <p style="font-weight: 500; margin-bottom: 5px;">Precision Track</p>
+                    <ul style="padding-left: 20px; margin-top: 5px;">
+                        <li>Stacks and Queues</li>
+                        <li>Bit manipulation</li>
+                        <li>Two Pointers</li>
+                    </ul>
+                    
+                    <p style="font-weight: 500; margin: 15px 0 5px 0;">Difficulty Focus</p>
+                    <div class="skill-tags" style="margin-top: 5px;">
+                        <div class="skill-tag">1000-1400</div>
+                        <div class="skill-tag">1400-1600</div>
+                        <div class="skill-tag">1600-1800</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skills-section">
+            <h3>Practice Paths</h3>
+            <div class="skill-tags">
+                <div class="skill-tag">Amazon Interview</div>
+                <div class="skill-tag">Linked Lists</div>
+                <div class="skill-tag">Prefix Sum</div>
+                <div class="skill-tag">Sliding Window</div>
+                <div class="skill-tag">1800-2000</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Codeforces Container -->
+    <div class="platform-container" style="--primary-color: #3B5998;">
+        <div class="platform-header">
+            <div class="platform-title">
+                <h2>Codeforces</h2>
+                <div class="platform-rank">Unrated | 4 Problems Solved</div>
+            </div>
+            <p>ap_22bce9201 | Registered: 7 months ago</p>
+        </div>
+        
+        <div class="stats-grid">
+            <!-- Column 1: Activity Stats -->
+            <div class="stat-card">
+                <h3>Activity</h3>
+                <div style="margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>All Time:</span>
+                        <span>4 problems</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Last Year:</span>
+                        <span>4 problems</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Last Month:</span>
+                        <span>0 problems</span>
+                    </div>
+                    
+                    <h4 style="margin-top: 20px;">Streaks</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span>Max Streak:</span>
+                        <span>3 days</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Current Year:</span>
+                        <span>3 days</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column 2: Profile Info -->
+            <div class="stat-card">
+                <h3>Profile</h3>
+                <div style="margin-top: 15px;">
+                    <p><strong>Status:</strong> Online now</p>
+                    <p><strong>Contribution:</strong> 0</p>
+                    <p><strong>Friends:</strong> 0 users</p>
+                    
+                    <h4 style="margin-top: 20px;">Quick Links</h4>
+                    <div class="skill-tags" style="margin-top: 10px;">
+                        <div class="skill-tag">Submissions</div>
+                        <div class="skill-tag">Contests</div>
+                        <div class="skill-tag">Blog</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    <footer class="footer">
+        <div class="footer-container">
+            <button class="footer-btn" onclick="location.href='index.html'">Home</button>
+            <button class="footer-btn" onclick="history.back()">Back</button>
+        </div>
+    </footer>
+    
+    <script>
+        // Function to fetch LeetCode data
+        async function fetchLeetCodeData() {
+            const username = 'ap_22bce9201';
+            
+            // List of available LeetCode API endpoints to try
+            const API_ENDPOINTS = [
+                `https://leetcode-api-faisalshohag.vercel.app/${username}`,
+                `https://leetcodestats.cyclic.app/${username}`,
+                `https://leetcode-api.deno.dev/${username}`
+            ];
+
+            // Try each API endpoint in sequence
+            for (const endpoint of API_ENDPOINTS) {
+                try {
+                    const response = await fetch(endpoint);
+                    
+                    if (!response.ok) continue; // Try next endpoint if this one fails
+                    
+                    const data = await response.json();
+                    
+                    // Validate the response contains required data
+                    if (data && (data.totalSolved !== undefined || data.matchedUser)) {
+                        processLeetCodeData(data);
+                        return; // Exit if successful
+                    }
+                } catch (error) {
+                    console.log(`Error with API ${endpoint}:`, error.message);
+                    // Continue to next endpoint
+                }
+            }
+            
+            // If all APIs failed, use mock data
+            console.log('All APIs failed, using mock data');
+            useMockData();
+            
+            // Call streak function regardless
+            updateStreak();
+        }
+
+        function processLeetCodeData(data) {
+            // Handle different API response formats
+            const stats = data.matchedUser?.submitStats?.acSubmissionNum || [];
+            
+            const result = {
+                ranking: data.ranking || data.matchedUser?.profile?.ranking || 0,
+                totalSolved: data.totalSolved || (stats.find(s => s.difficulty === 'All')?.count || 0),
+                easySolved: data.easySolved || (stats.find(s => s.difficulty === 'Easy')?.count || 0),
+                mediumSolved: data.mediumSolved || (stats.find(s => s.difficulty === 'Medium')?.count || 0),
+                hardSolved: data.hardSolved || (stats.find(s => s.difficulty === 'Hard')?.count || 0),
+                totalQuestions: 2800,  // Approximate totals
+                totalEasy: 700,
+                totalMedium: 1500,
+                totalHard: 600
+            };
+            
+            updateLeetCodeUI(result);
+        }
+
+        function updateLeetCodeUI(data) {
+            // Calculate percentages
+            const totalPercent = Math.round((data.totalSolved / data.totalQuestions) * 100);
+            const easyPercent = Math.round((data.easySolved / data.totalEasy) * 100);
+            const mediumPercent = Math.round((data.mediumSolved / data.totalMedium) * 100);
+            const hardPercent = Math.round((data.hardSolved / data.totalHard) * 100);
+            const totalUsers = 800000; // Approximate total users
+            const rankingPercentage = Math.round((data.ranking / totalUsers) * 100);
+            
+            // Update rank
+            document.getElementById('leet-rank').innerHTML = 
+                `Rank: ${data.ranking.toLocaleString()} (Top ${rankingPercentage}%)`;
+            
+            // Update problems solved
+            document.getElementById('total-solved-label').textContent = 
+                `Total: ${data.totalSolved}/${data.totalQuestions}`;
+            document.getElementById('total-solved-percent').textContent = `${totalPercent}%`;
+            document.getElementById('total-solved-bar').style.width = `${totalPercent}%`;
+            
+            // Update difficulty breakdowns
+            document.getElementById('easy-solved-label').textContent = 
+                `Easy: ${data.easySolved}/${data.totalEasy}`;
+            document.getElementById('easy-solved-percent').textContent = `${easyPercent}%`;
+            document.getElementById('easy-solved-bar').style.width = `${easyPercent}%`;
+            
+            document.getElementById('medium-solved-label').textContent = 
+                `Medium: ${data.mediumSolved}/${data.totalMedium}`;
+            document.getElementById('medium-solved-percent').textContent = `${mediumPercent}%`;
+            document.getElementById('medium-solved-bar').style.width = `${mediumPercent}%`;
+            
+            document.getElementById('hard-solved-label').textContent = 
+                `Hard: ${data.hardSolved}/${data.totalHard}`;
+            document.getElementById('hard-solved-percent').textContent = `${hardPercent}%`;
+            document.getElementById('hard-solved-bar').style.width = `${hardPercent}%`;
+            
+            // Update language stats (using your existing manual data)
+            const languages = {
+                'Java': 610,
+                'MySQL': 13,
+                'Python3': 11
+            };
+            const maxSubmissions = Math.max(...Object.values(languages));
+            document.getElementById('java-count').textContent = languages['Java'];
+            document.getElementById('java-bar').style.width = `${(languages['Java'] / maxSubmissions) * 100}%`;
+            document.getElementById('mysql-count').textContent = languages['MySQL'];
+            document.getElementById('mysql-bar').style.width = `${(languages['MySQL'] / maxSubmissions) * 100}%`;
+            document.getElementById('python-count').textContent = languages['Python3'];
+            document.getElementById('python-bar').style.width = `${(languages['Python3'] / maxSubmissions) * 100}%`;
+        }
+
+        function useMockData() {
+            const mockData = {
+                ranking: 123456,
+                totalSolved: 610,
+                easySolved: 150,
+                mediumSolved: 400,
+                hardSolved: 60,
+                totalQuestions: 2800,
+                totalEasy: 700,
+                totalMedium: 1500,
+                totalHard: 600
+            };
+            
+            updateLeetCodeUI(mockData);
+            document.getElementById('leet-rank').textContent += ' (Mock Data)';
+        }
+        
+                
+        try {
+                // ===== UPDATE ACTIVITY SECTION =====
+                // Function to calculate and update streak
+                function updateStreak() {
+                    // Configuration - Set your initial values here
+                    const initialStreak = 286;      // Your streak count on the start date
+                    const startDate = "2025-07-13"; // The date when your streak was at initialStreak (YYYY-MM-DD)
+                    const activeDays = 312;         // Total active days (can keep this fixed)
+                    const submissions = 1217;       // Total submissions (can keep this fixed)
+                    
+                    // Calculate days passed since start date
+                    const start = new Date(startDate);
+                    const today = new Date();
+                    const timeDiff = today - start;
+                    const daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                    // Calculate current streak
+                    const currentStreak = initialStreak + daysPassed;
+                    const consistencyPercent = Math.round((activeDays/365)*100);
+                    
+                    // Update the DOM
+                    document.getElementById('current-streak').textContent = `${currentStreak} days`;
+                    document.getElementById('active-days').textContent = `${activeDays} (${consistencyPercent}%)`;
+                    document.getElementById('submissions').textContent = `${submissions.toLocaleString()} (~${Math.round(submissions / 365)}/day)`;
+                    document.getElementById('consistency-percent').textContent = `${consistencyPercent}%`;
+                    document.getElementById('consistency-bar').style.width = `${consistencyPercent}%`;
+                    
+                    console.log(`Streak calculated: ${initialStreak} (initial) + ${daysPassed} days = ${currentStreak}`);
+                }
+                        // Call the streak update function
+                updateStreak();
+            } catch (error) {
+                console.error('Error updating streak:', error);
+                document.getElementById('current-streak').textContent = 'Error loading streak';
+            }
+        
+
+        // Fetch data when page loads
+        document.addEventListener('DOMContentLoaded', fetchLeetCodeData);
+    </script>
+
+</body>
+</html>
+
