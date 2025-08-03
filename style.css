@@ -1192,7 +1192,7 @@ nav a:hover::after {
     align-items: center;
     gap: 1rem;
     transition: opacity 0.3s;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .btn-small:hover {
