@@ -782,6 +782,12 @@ nav a:hover::after {
     100% { transform: translateX(100%); }
 }
 
+.cert-actions {
+    display: flex;
+    gap: 10px; /* This adds space between the buttons */
+    margin-top: 10px; /* Optional: Adds space above the buttons */
+}
+
 /* ===== EXPERIENCE SECTION ===== */
 .timeline {
     position: relative;
