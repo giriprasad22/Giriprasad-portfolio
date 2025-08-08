@@ -119,3 +119,86 @@ function animateStreakCounter(element, target) {
     // This is just a placeholder as it wasn't defined in the original code
     element.textContent = `${target}-day streak`;
 }
+
+
+// ===== PROJECTS SHOW MORE FUNCTIONALITY (SINGLE CLEAN VERSION) =====
+document.addEventListener('DOMContentLoaded', function() {
+    const projectGrid = document.querySelector('.projects-grid');
+    const showMoreProjectBtn = document.getElementById('show-more-projects');
+    
+    if (projectGrid && showMoreProjectBtn) {
+        console.log('Project elements found'); // Debug line
+        
+        // Set initial collapsed state
+        projectGrid.style.maxHeight = '1100px';
+        projectGrid.style.overflow = 'hidden';
+        projectGrid.classList.add('collapsed');
+        
+        // Single event listener
+        showMoreProjectBtn.addEventListener('click', function() {
+            console.log('Project button clicked'); // Debug line
+            
+            if (projectGrid.classList.contains('collapsed')) {
+                // Expand
+                projectGrid.style.maxHeight = projectGrid.scrollHeight + 'px';
+                projectGrid.classList.remove('collapsed');
+                projectGrid.classList.add('expanded');
+                showMoreProjectBtn.textContent = 'Show Less Projects ▲';
+                console.log('Projects Expanded');
+            } else {
+                // Collapse
+                projectGrid.style.maxHeight = '800px';
+                projectGrid.classList.remove('expanded');
+                projectGrid.classList.add('collapsed');
+                showMoreProjectBtn.textContent = 'Show More Projects ▼';
+                console.log('Projects Collapsed');
+                projectGrid.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    } else {
+        console.log('Project elements NOT found');
+        console.log('projectGrid:', projectGrid);
+        console.log('showMoreProjectBtn:', showMoreProjectBtn);
+    }
+});
+
+
+// ===== CERTIFICATIONS SHOW MORE FUNCTIONALITY (SINGLE CLEAN VERSION) =====
+document.addEventListener('DOMContentLoaded', function() {
+    const certGrid = document.querySelector('.certifications-grid');
+    const showMoreBtn = document.getElementById('show-more-certs');
+    
+    if (certGrid && showMoreBtn) {
+        console.log('Certificate elements found'); // Debug line
+        
+        // Set initial collapsed state
+        certGrid.style.maxHeight = '900px';
+        certGrid.style.overflow = 'hidden';
+        certGrid.classList.add('collapsed');
+        
+        // Single event listener
+        showMoreBtn.addEventListener('click', function() {
+            console.log('Button clicked'); // Debug line
+            
+            if (certGrid.classList.contains('collapsed')) {
+                // Expand
+                certGrid.style.maxHeight = certGrid.scrollHeight + 'px';
+                certGrid.classList.remove('collapsed');
+                certGrid.classList.add('expanded');
+                showMoreBtn.textContent = 'Show Less ▲';
+                console.log('Expanded');
+            } else {
+                // Collapse
+                certGrid.style.maxHeight = '800px';
+                certGrid.classList.remove('expanded');
+                certGrid.classList.add('collapsed');
+                showMoreBtn.textContent = 'Show More Certifications ▼';
+                console.log('Collapsed');
+            }
+        });
+    } else {
+        console.log('Certificate elements NOT found');
+        console.log('certGrid:', certGrid);
+        console.log('showMoreBtn:', showMoreBtn);
+    }
+});
