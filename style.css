@@ -402,22 +402,87 @@ nav a:hover::after {
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
     z-index: 2;
-}
-.scroll-down {
     animation: bounce 2s infinite;
 }
 
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-    40% { transform: translateY(-20px) translateX(-50%); }
-    60% { transform: translateY(-10px) translateX(-50%); }
+.scroll-down span {
+    margin-bottom: 5px;
+    font-size: 1.4rem;
 }
+
 .scroll-down i {
-    margin-top: 10px;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { 
+        transform: translateY(0) translateX(-50%); 
+    }
+    40% { 
+        transform: translateY(-10px) translateX(-50%); 
+    }
+    60% { 
+        transform: translateY(-5px) translateX(-50%); 
+    }
 }
 
 /* ===== PROJECTS SECTION ===== */
+
+
+.container {
+  overflow: hidden;
+  position: relative; /* For potential fading overlay */
+}
+
+.projects-grid {
+  display: grid; /* or your existing layout */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  margin: 0 auto;
+  width: 100%;
+
+  max-height: 800px; /* Collapsed height - adjust to fit 2 rows approximately */
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  position: relative; /* For overlay */
+}
+
+.projects-grid.collapsed {
+  max-height: 800px;
+  overflow: hidden;
+}
+
+/* Optional fading overlay hint */
+.projects-grid.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, white);
+}
+
+/* Hide the "Show More" button if not needed */
+#show-more-projects.hidden {
+  display: none;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+
+
+
+
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -787,6 +852,92 @@ nav a:hover::after {
     gap: 10px; /* This adds space between the buttons */
     margin-top: 10px; /* Optional: Adds space above the buttons */
 }
+/* ===== RESEARCH SECTION ===== */
+.research {
+    background: var(--light-alt);
+    padding: 8rem 0;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.research-card {
+    background: var(--light);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.research-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.research-badge {
+    padding: 2rem;
+    background: linear-gradient(135deg, #4a6bff 0%, #3a56d4 100%);
+    text-align: center;
+}
+
+.research-badge img {
+    width: 180px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.research-content {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.research-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.research-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.research-category {
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: rgba(74, 107, 255, 0.1);
+    color: #4a6bff;
+}
+
+.research-date {
+    color: var(--dark);
+    opacity: 0.7;
+    font-size: 1.2rem;
+}
+
+.research-content p {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+.research-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
 
 /* ===== EXPERIENCE SECTION ===== */
 .timeline {
@@ -875,7 +1026,14 @@ nav a:hover::after {
     left: 0;
     color: var(--primary);
 }
-
+.learning-objectives {
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+}
+.learning-objectives ul {
+    margin: 0.25rem 0;
+    padding-left: 1.2rem;
+}
 .timeline-item::after {
     content: '';
     position: absolute;
@@ -981,6 +1139,49 @@ nav a:hover::after {
 
 
 /* Certifications Section */
+
+
+
+/* Initially show only 2 rows (6 certs if 3 per row) */
+.certifications-grid {
+    max-height: 800px; /* same as your collapsed height */
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    position: relative; /* needed if you want to add overlay */
+}
+
+/* When collapsed */
+.certifications-grid.collapsed {
+    max-height: 800px; /* Adjust based on your cert card height */
+    overflow: hidden;
+}
+
+.certifications-grid.collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, white);
+  pointer-events: none;
+}
+
+
+/* Hide the show more button when not needed */
+#show-more-certs.hidden {
+    display: none;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
 .certifications {
     background: var(--light-alt);
     padding: 8rem 0;
@@ -998,8 +1199,8 @@ nav a:hover::after {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 3rem;
-    max-width: 800px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .cert-card {
