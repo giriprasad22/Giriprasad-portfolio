@@ -229,7 +229,7 @@ nav a:hover::after {
 
 #theme-toggle:hover {
     color: var(--primary);
-    transform: rotate(30deg);
+    /* transform: rotate(30deg); */
 }
 
 .menu-toggle {
@@ -238,6 +238,38 @@ nav a:hover::after {
     cursor: pointer;
     color: var(--dark);
 }
+
+/* Add this to your CSS file */
+#theme-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.theme-hint {
+    position: absolute;
+    left: 100%;
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    margin-left: 1rem;
+    margin-top:6px; ;
+}
+
+
+/* For dark mode */
+[data-theme="dark"] .theme-hint {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+}
+
 
 /* ===== HERO SECTION ===== */
 
@@ -1225,11 +1257,20 @@ nav a:hover::after {
 }
 
 .cert-badge img {
-    width: 60px;
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+.cert-badgefreeCodeCamp {
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--primary) 0%, #4a42e8 100%);
+    text-align: center;
+}
+.cert-badgefreeCodeCamp img{
+    width: 600px;
     height: 60px;
     object-fit: contain;
 }
-
 .cert-content {
     padding: 2rem;
     flex-grow: 1;
